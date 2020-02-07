@@ -1,3 +1,8 @@
+//research
+1. main함수의 리턴값 0 
+2. C언어 Coding 방식 
+
+
 // Programming 1 ( Extracting Prime Number )
 
 #include <stdio.h>
@@ -45,7 +50,7 @@ int main(void)
  
    return 0 ;
  }
-    
+   
 
    
     
