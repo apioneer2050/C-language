@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main(void)
+{
+
+  int a; 
+  int *pa; 
+  
+  pa = &a; 
+  *pa = 10; 
+  
+  printf("Printing value a with pointer : %d\n", *pa); //결과값 10
+  printf("printing value a with variable name : %d\n", a); // 결과값 10
+  
+  return 0; 
+ 
+ }
+ 
+ //포인터의 개념 : a값의 주소를 포인터 변수로 선언 
