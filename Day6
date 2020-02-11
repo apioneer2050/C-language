@@ -1,0 +1,34 @@
+/* 미니 정렬 프로그램*(포인터 사용)/
+#include <stdio.h>
+
+void swap(double *pa, double *pb); //swap 함수 정의
+void line_up(double *maxp, double *midp, double *minp); //max, mid, min 값 정렬을 위한 함수 정의
+
+int main(void) // main 함수
+{
+  double max, mid, min; //최대값, 중간값, 최소값 지정
+   
+  printf("Enter three real numbers\n"); 
+  scanf("%lf%lf%lf", &max, &mid, &min); // 값 3개 입력
+  line_up(&max, &mid, &min); // line_up 함수 사용
+  printf("lined_up values : %.1lf, %.1lf, %.1lf\n", max, min); //결과값 출력
+  
+  return 0; 
+ }
+
+void swap(double *pa, double *pb) // swap 함수 정의
+{
+  double temp; // 일시 보관 저장소 temp 생성
+    
+  temp = *pa;
+  *pa = *pb;
+  *pb = temp;
+ }
+ 
+ void line_up(double *maxp, double *midp, double *minp) // line_up 함수 정의
+ {
+    if(*maxp < *midp) swap(&*maxp, &*midp);
+    if(*maxp < *minp) swap(&*maxp, &*minp);
+    if(*midp < *minp) swap(&*midp, &*minp);
+  }
+  
