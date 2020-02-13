@@ -43,3 +43,186 @@ void main(void)
 		_delay_ms(1);
 	}
 }
+
+
+
+
+***********************************************************************************************************************************
+7 세그먼트에 ‘12.8’을 표시하는 프로그램
+***********************************************************************************************************************************
+#include <avr/io.h>
+#include <util/delay.h>
+#define F_CPU 14745600UL
+
+unsigned char Font[18] = {0x3F, 0X06, 0X5B, 0X4F,
+	0X66, 0X6D, 0X7C, 0X07,
+	0X7F, 0X6F, 0X77, 0X7C,
+	0X39, 0X5E, 0X79, 0X71,
+0X40, 0X80};
+
+void main(void)
+{
+	DDRB = 0xff;
+	DDRG = 0xff;
+	
+	while(1)
+	{
+		PORTG = 0x0e;
+		PORTB = Font[1];
+		_delay_ms(1);
+
+		PORTG = 0x0d;
+		PORTB = Font[2];
+		_delay_ms(1);
+
+		PORTG = 0x0b;
+		PORTB = Font[17];
+		_delay_ms(1);
+		
+		PORTG = 0x07;
+		PORTB = Font[8];
+		_delay_ms(1);
+	}
+}
+
+
+
+***********************************************************************************************************************************
+7-세그먼트 이용하여 ‘9999’에서 ‘0000’ 까지 ‘-1’씩 감소하는 프로그램         //     http://bit.ly/37pe4cW
+***********************************************************************************************************************************
+/*
+ * GccApplication9.c
+ *
+ * Created: 2020-02-13 오전 11:30:08
+ * Author : COMPUTER
+ */ 
+
+#include <avr/io.h>
+#include <util/delay.h>
+#define F_CPU 14745600 UL
+
+unsigned char Font[18] = {0x3F, 0X06, 0X5B, 0X4F,
+	0X66, 0X6D, 0X7C, 0X07,
+	0X7F, 0X6F, 0X77, 0X7C,
+	0X39, 0X5E, 0X79, 0X71,
+	0X08, 0X80};
+
+void Segment(int) ; 
+
+void Segment(int N )
+{
+	int i ;
+	unsigned char N1000, N100, N10, N1 ;
+	int Buff ;
+
+	N1000 = N /1000;  //천의 자리의 숫자 하나를 한 자리수로 만듬
+	Buff = N % 1000 ; //천의 자리 숫자를 일의 자리로 나타냄
+	N100 = Buff / 100 ;
+	Buff = Buff % 100;
+	N10 = Buff /10 ; 
+	N1 = Buff % 10 ; 
+
+	for( i = 30 ; i > 0; i--) {
+		PORTG = 0x0e;
+		PORTB = Font[N1000]; 
+		_delay_ms(1);
+		PORTG = 0x0d; 
+		PORTB = Font[N100]; 
+		_delay_ms(1);
+		PORTG = 0x0b; 
+		PORTB = Font[N10];
+		_delay_ms(1);
+		PORTG = 0x07; 
+		PORTB = Font[N1]; 
+		_delay_ms(1);
+	}
+}
+void main(void)
+{
+	int count = 9999; //9999로부터 시작
+	DDRB = 0xff;
+	DDRG = 0xff;
+
+	while(1)
+	{
+		Segment(count);
+		count = count - 1;
+		if (count==0) //0에 도달
+		count = 9999; //0에 도달하면 9999로 리셋
+	}
+
+}
+
+
+
+***********************************************************************************************************************************
+7-세그먼트를 이용하여 ‘0000’에서 ‘FFFF' 까지 +1 씩 증가하는 프로그램          //   http://bit.ly/2SFwyR9
+***********************************************************************************************************************************
+
+
+/*
+ * GccApplication9.c
+ *
+ * Created: 2020-02-13 오전 11:30:08
+ * Author : COMPUTER
+ */ 
+
+#include <avr/io.h>
+#include <util/delay.h>
+#define F_CPU 14745600 UL
+
+unsigned char Font[18] = {0x3F, 0X06, 0X5B, 0X4F,
+	0X66, 0X6D, 0X7C, 0X07,
+	0X7F, 0X6F, 0X77, 0X7C,
+	0X39, 0X5E, 0X79, 0X71,
+	0X08, 0X80};
+
+void Segment(int) ; 
+
+void Segment(int N )
+{
+	int i ;
+	unsigned char N4096, N256, N16, N1 ;
+	int Buff ;
+
+	N4096 = N /4096; // 16^3으로 나눔
+	Buff = N % 4096 ;
+	N256 = Buff / 256 ; //16^2로 나눔
+	Buff = Buff % 256;
+	N16 = Buff /16 ; 
+	N1 = Buff % 16 ; 
+
+	for( i = 0 ; i < 48; i++) {
+		PORTG = 0x0e;
+		PORTB = Font[N4096]; 
+		_delay_ms(1);
+		PORTG = 0x0d; 
+		PORTB = Font[N256]; 
+		_delay_ms(1);
+		PORTG = 0x0b; 
+		PORTB = Font[N16];
+		_delay_ms(1);
+		PORTG = 0x07; 
+		PORTB = Font[N1]; 
+		_delay_ms(1);
+	}
+}
+void main(void)
+{
+	int count = 0;
+	DDRB = 0xff;
+	DDRG = 0xff;
+
+	while(1)
+	{
+		Segment(count);
+		count = count + 1;
+		if (count==0)
+		count = 0;
+	}
+
+}
+
+
+
+
