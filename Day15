@@ -1,0 +1,10 @@
+<프로젝트 시작>
+
+1. 주제: Atmega 128-A를 이용한 스마트 도어락
+2. OS : Windows10 / HBE-MCU-MULTI 2
+3. 이용 모듈 : Servo Motor, 2x16 text lcd, Keypad Module
+4. 방법 : 
+  ㄱ. Keypad Module을 누른다.
+  ㄴ. 미리 입력한 Password값과 일치할 경우 Servo Motor Module을 작동
+      일치하지 않는 경우 LCD에 Wrong Password 표시
+  
