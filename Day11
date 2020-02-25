@@ -1,0 +1,44 @@
+******************서보모터를 위치제어 하여 +90° → 0° →-90°→를 왕복하는 프로그램을 구현******************
+****************************************************************************************************
+
+#include <mega128a.h>          
+#include <delay.h>
+
+void main(void)
+{
+unsigned int i;
+ DDRB.7 = 1;
+ 
+ while(1)
+ {             
+   for(i = 0; i <50 ; i++ ){ // +90도 동작 
+        PORTB.7 = 1;
+        delay_us(700);    // 0.7[ms]
+        PORTB.7 = 0;
+        delay_us(19300);  // 19.3[ms]                     
+    }   
+   for(i = 0; i <50 ; i++ ) {// 0도 동작 
+        PORTB.7 = 1;
+        delay_us(1500);      // 1.5[ms]
+        PORTB.7 = 0;
+        delay_us(18500);     // 18.5[ms]                  
+   }  
+   for(i = 0; i <50 ; i++ ){ // -90도 동작 
+        PORTB.7 = 1;
+        
+문제점 
+
+HBE-MCU-MULTI2 한백전자의 메뉴얼은 Code Vision을 중심으로 작성되어 아래와 같이 Include값과 Define을 추가, 수정하였음.
+//#define F_CPU 14745600UL
+#include <avr/io.h>
+#include <util/delay.h>//
+
+해결과정
+	//DDRB.7 = 1;
+  PORTB.7 = 1;
+  PORTB.7 = 0;//
+  에 대하여 ㄱ. B의 7번 포트를 출력 ㄴ. B의 7번포트를 High(=1)로 설정 ㄷ. B의 7번포트를 Low(=1)으로 설정
+  이라는 것을 알아낸 후 논리연산자로 재구현함.
+  //DDRB |= (1 << DDB7);
+  PORTB |= (1 << PORTB7);
+  PORTB &= ~(1 << PORTB7);//
