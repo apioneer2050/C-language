@@ -1,0 +1,16 @@
+********************************************************
+'Hover-over' tooltip text without using mouse
+********************************************************
+<Question>
+
+Is there a command to get the 'hover-over' tooltip text to display without using the mouse?
+I want for it to pop-up with a keybind if my cursor is currently over it.
+
+
+
+<Answer>
+
+
+I can see you wants this for Visual Studio 2017. I only know the answer for Visual Studio Code, but mybe they share the same shortcut?
+So for Visual Studio Code it is: Ctrl+k Ctrl+i. This will make the hover information popup.
+Hope this helps. Cheers!
