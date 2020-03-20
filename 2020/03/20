@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> //strcat을 불러오기 위한 헤더 파일
+#include <malloc.h> // _msize를 불러오기 위한 헤더 파일
+
+int main(void)
+{
+	char temp[32]; 
+	char* ps, * pt; 
+	int len = 1; 
+
+	ps = (char*)calloc(1, 1); 
+	while (1)
+	{
+		printf("메모 입력 :  ");
+		fgets(temp, sizeof(temp), stdin);//file gets 
+		temp[strlen(temp) - 1] = '\0'; //NULL값 입력
+		
+		if (strcmp(temp, "end") == 0) break; //temp에 저장된 값과 문자열 end가 같다면 
+
+		len += strlen(temp) + 1; //+1은 개행문자(enter 등)을 입력받아 상쇄시켜 버리기 위해 입력
+		pt = (char*)realloc(ps, len);
+		
+		if (pt == NULL)
+		{
+			printf("메모리 부족...\n");
+			break;
+		}
+		ps = pt; 
+
+		strcat_s(ps, _msize(ps), temp); 
+    
+    /*sizeof와 strlen을 사용해보았으나 둘 다 에러, ps는 char* , 
+    즉 포인터이므로 4바이트임. 동적할당된 ps사이즈를 구하기 위해 _msize함수 사용 */
+    
+		strcat_s(ps, _msize(ps), " ");
+	}
+
+	printf("%s\n", ps);
+	free(ps);
+
+	return 0;
+}
