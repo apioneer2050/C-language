@@ -1,0 +1,5 @@
+https://www.arduino.cc/reference/en/
+
+연산자와 함수의 차이 : ()가 있고 없고 차이 
+연산자는 괄호가 필요없음 
+sizeof() 이렇게 안해도 됨. 특수한 경우에만 괄호사용 ex) sizeof(int) 이미 사이즈가 정해져 있는 경우
