@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <mysql/mysql.> // 헤더파일 
+
+int main(int argc, char * argv[])
+  MYSQL * conn = mysql_init(NULL);  //MySQL 서버를 핸들링할 객체를 메모리에 할당하고 초기화;
+    
+  if(conn == NULL)                  //mysql_init() 함수의 결과값을 검사. NULL이라면 에러를 출력후 죵료;
+  {
+    fprintf(stderr, "%s\n", mysql_error(conn)); 
+    exit(1)
+  }
+  
+  if(mysql_real_connect(conn, "localhost", "hansol", "1234", "mydb1", 0, NULL, 0) == NULL)   //MySQL 서버 시스템에 접속하는 mysql 헤더파일 내장함수 
+  {
+    fprintf(stderr, "%s\n", mysql_error(conn));
+    mysql_close(conn);
+    exit(1);
+  }
+  if(mysql_query(conn, "create table mytable2(id int(10) not null auto_increment primary key, name varchar(10) not null);"))   //mysql_query() sql 문장을 실행하는 함수 
+  { 
+    fprintf(stderr, "%s\n", mysql_error(conn));
+    mysql_close(conn);
+    exit(1);
+  }
+  MYSQL_RES * result = mysql_store_result(conn);
+  if(result == NULL)
+  {
+  }
+  
+  int num_fields = mysql_num_fields(result);
+  
+  MYSQL_ROW row;
+  while(row = mysql_fetch_row(result))        //row 변수에 mysql_fetch_row(result)이 들어가는 것을 조건으로 동작
+  {
+    for(int i = 0; i < num_fields; i++)
+      printf("%s ", row[i]);                  //field 단위로 출력
+    printf("\n");
+  }
+  mysql_free_result(result);
+  mysql_close(conn):
+  exit(0);
+   
