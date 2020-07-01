@@ -23,5 +23,8 @@ True || False == True;
 
 
 ************* Disclaimer **************
-Java 에서는 비트 연산자를 논리 연산자로 사용할 수 있지만 동작 방식이 다름. 이를 Short-circuit 이라고 함. 
+1. Java 에서는 비트 연산자를 논리 연산자로 사용할 수 있지만 동작 방식이 다름. 이를 Short-circuit 이라고 함. 
 참조 :            https://tomining.tistory.com/150
+
+2. C에서 논리연산자는 0을 제외한 모든 숫자를 True로 인식, 0을 False로 인식함.
+참조 :            https://overiq.com/c-programming-101/logical-operators-in-c/
