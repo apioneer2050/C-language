@@ -1,0 +1,27 @@
+<Bitwise Operators> 비트연산자
+&
+둘 다 1 인경우 1 
+0101 & 0100 == 0100;
+
+|
+둘 중에 하나 이상이 1 인경우 
+0001 | 0000 == 0001;
+
+
+
+
+<Logical Operators> 논리연산자
+&&
+둘 다 True 인 경우 True
+True && True == True; 
+True && False == False;
+
+||
+둘 중에 하나 이상이 True
+True && True == True; 
+True || False == True; 
+
+
+************* Disclaimer **************
+Java 에서는 비트 연산자를 논리 연산자로 사용할 수 있지만 동작 방식이 다름. 이를 Short-circuit 이라고 함. 
+참조 :            https://tomining.tistory.com/150
